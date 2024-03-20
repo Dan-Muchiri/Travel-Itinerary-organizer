@@ -21,5 +21,18 @@ def debug():
   for trip in all_trips:
       print(trip)
 
+  search_trip = Trip.find_by_id(1)
+  if search_trip:
+      print("Trip found:", search_trip)
+  else:
+      print("Trip not found.")
+
+  trip = Trip.find_by_name("Trip to Paris")
+  if trip:
+      print("Trip found:", trip)
+  else:
+      print("Trip not found.")
+
+
 debug()
 ipdb.set_trace()

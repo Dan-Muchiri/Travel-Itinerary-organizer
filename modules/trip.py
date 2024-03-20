@@ -39,3 +39,23 @@ class Trip(Base):
         :return: A list of Trip objects representing all trips.
         """
         return session.query(cls).all()
+    
+    @classmethod
+    def find_by_id(cls, trip_id):
+        """
+        Find a trip by its ID.
+
+        :param trip_id: The ID of the trip to find.
+        :return: The Trip object if found, None otherwise.
+        """
+        return session.query(cls).filter_by(id=trip_id).first()
+    
+    @classmethod
+    def find_by_name(cls, name):
+        """
+        Find a trip by its name.
+
+        :param name: The name of the trip to find.
+        :return: The Trip object if found, None otherwise.
+        """
+        return session.query(cls).filter_by(name=name).first()
