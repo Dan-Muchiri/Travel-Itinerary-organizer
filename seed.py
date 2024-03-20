@@ -1,15 +1,23 @@
 from modules.trip import Trip
-from inititialization import engine
 from modules.accomodation import Accommodation
 from modules.activity import Activity
 from modules.destination import Destination
 from modules.transportation import Transportation
-from init import Base
+from init import Base, engine
 from faker import Faker
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import SQLAlchemyError
 
 # Create an instance of Faker
 fake = Faker()
+
+try:
+    Base.metadata.drop_all(engine)
+    # Create the database tables
+    Base.metadata.create_all(engine)
+    print("Database tables created successfully.")
+except SQLAlchemyError as e:
+    print("Error creating database tables:", e)
 
 # Define function to generate fake data for trips, destinations, accommodations, activities, and transportation
 def generate_seed_data():
@@ -87,6 +95,8 @@ def generate_seed_data():
         session.close()
 
 if __name__ == "__main__":
+
+    # Generate seed data # Clear
     generate_seed_data()
 
 
