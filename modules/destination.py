@@ -9,7 +9,6 @@ class Destination(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    location = Column(String, nullable=False)
     trip_id = Column(Integer, ForeignKey('trips.id'))
 
     # Relationship with Trip (many-to-one)

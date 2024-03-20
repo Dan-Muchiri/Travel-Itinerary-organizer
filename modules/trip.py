@@ -30,3 +30,12 @@ class Trip(Base):
         new_trip = Trip(name=name, start_date=start_date, end_date=end_date, description=description)
         session.add(new_trip)
         session.commit()
+
+    @classmethod
+    def get_all_trips(cls):
+        """
+        Retrieve all trips from the database.
+
+        :return: A list of Trip objects representing all trips.
+        """
+        return session.query(cls).all()

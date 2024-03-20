@@ -43,7 +43,6 @@ def generate_seed_data():
         for _ in range(10):
             destination = Destination(
                 name=fake.country() + " City",
-                location=fake.city(),
                 trip=fake.random_element(trips)
             )
             destinations.append(destination)
