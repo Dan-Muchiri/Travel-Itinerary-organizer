@@ -2,7 +2,7 @@
 
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from trip import Base
+from init import Base
 
 class Destination(Base):
     __tablename__ = 'destinations'

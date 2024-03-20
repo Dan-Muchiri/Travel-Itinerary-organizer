@@ -1,9 +1,10 @@
 # trip.py
 
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.orm import relationship
 
-Base = declarative_base()
+from init import Base
+
 
 class Trip(Base):
     __tablename__ = 'trips'

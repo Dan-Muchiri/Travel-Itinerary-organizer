@@ -1,9 +1,10 @@
-from trip import Trip, Base
-from init import engine
-from accomodation import Accommodation
-from activity import Activity
-from destination import Destination
-from transportation import Transportation
+from modules.trip import Trip
+from inititialization import engine
+from modules.accomodation import Accommodation
+from modules.activity import Activity
+from modules.destination import Destination
+from modules.transportation import Transportation
+from init import Base
 from faker import Faker
 from sqlalchemy.orm import sessionmaker
 

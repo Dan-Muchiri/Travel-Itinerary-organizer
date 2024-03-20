@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from trip import Base
+from init import Base
 
 class Accommodation(Base):
     __tablename__ = 'accommodations'

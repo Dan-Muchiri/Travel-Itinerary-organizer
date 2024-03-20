@@ -1,10 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
-from trip import Base, Trip
-from destination import Destination
-from activity import Activity
-from accomodation import Accommodation
-from transportation import Transportation
+from modules.trip import Trip
+from modules.destination import Destination
+from modules.activity import Activity
+from modules.accomodation import Accommodation
+from modules.transportation import Transportation
+from init import Base
 
 # Define your database URL
 db_url = "sqlite:///travel_organizer.db"
