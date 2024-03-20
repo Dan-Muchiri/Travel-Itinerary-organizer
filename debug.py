@@ -1,10 +1,7 @@
 from modules.trip import Trip
 from modules.accomodation import Accommodation
-from modules.activity import Activity
 from modules.destination import Destination
-from modules.transportation import Transportation
 from init import Base, engine
-from sqlalchemy.orm import sessionmaker
 import ipdb
 
 

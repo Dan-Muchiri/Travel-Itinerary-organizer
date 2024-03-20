@@ -15,9 +15,6 @@ class Destination(Base):
     # Relationship with Trip (many-to-one)
     trip = relationship("Trip", back_populates="destinations")
 
-    # Relationship with Activity (one-to-many)
-    activities = relationship("Activity", back_populates="destination")
-
     # Relationship with Accommodation (one-to-many)
     accommodations = relationship("Accommodation", back_populates="destination")
 

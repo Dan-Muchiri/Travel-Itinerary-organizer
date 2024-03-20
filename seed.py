@@ -1,8 +1,6 @@
 from modules.trip import Trip
 from modules.accomodation import Accommodation
-from modules.activity import Activity
 from modules.destination import Destination
-from modules.transportation import Transportation
 from init import Base, engine
 from faker import Faker
 from sqlalchemy.orm import sessionmaker
@@ -40,44 +38,25 @@ def generate_seed_data():
             trips.append(trip)
             session.add(trip)
 
-        # Generate seed data for destinations, accommodations, activities, and transportations
+        # Generate seed data for destinations, accommodations,
+        destinations = [] 
         for _ in range(10):
             destination = Destination(
                 name=fake.country() + " City",
                 location=fake.city(),
                 trip=fake.random_element(trips)
             )
+            destinations.append(destination)
             session.add(destination)
 
             accommodation = Accommodation(
                 name=fake.company(),
-                check_in_date=fake.date(),
-                check_out_date=fake.date(),
+                price=fake.random_number(digits=3),
                 notes=fake.sentence(),
-                destination=destination
+                destination=fake.random_element(destinations)
             )
             session.add(accommodation)
 
-            activity = Activity(
-                name=fake.word(),
-                type=fake.word(),
-                time=fake.time(),
-                duration=fake.time(),
-                notes=fake.sentence(),
-                destination=destination
-            )
-            session.add(activity)
-
-            transportation = Transportation(
-                mode=fake.word(),
-                departure_date=fake.date(),
-                arrival_date=fake.date(),
-                departure_location=fake.city(),
-                arrival_location=fake.city(),
-                notes=fake.sentence(),
-                trip=fake.random_element(trips)
-            )
-            session.add(transportation)
 
         # Commit the changes
         session.commit()
