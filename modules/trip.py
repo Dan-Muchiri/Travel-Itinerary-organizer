@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from init import Base, session
+from datetime import datetime
+
 
 class Trip(Base):
     __tablename__ = 'trips'
@@ -71,3 +73,20 @@ class Trip(Base):
         if trip:
             session.delete(trip)
             session.commit()
+
+    def duration(self):
+        """
+        Calculate the duration of the trip in days.
+
+        :return: The duration of the trip in days.
+        """
+        # Convert start_date and end_date to datetime objects
+        start_date = datetime.strptime(self.start_date, "%Y-%m-%d")
+        end_date = datetime.strptime(self.end_date, "%Y-%m-%d")
+
+        # Calculate the difference between end_date and start_date
+        duration = (end_date - start_date).days
+
+        return duration
+
+
