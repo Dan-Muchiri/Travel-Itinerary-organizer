@@ -33,6 +33,14 @@ def debug():
   else:
       print("Trip not found.")
 
+  Trip.delete_trip(1)
+
+  # Retrieve all trips
+  all_trips = Trip.get_all_trips()
+  print("All trips:")
+  for trip in all_trips:
+      print(trip)
+
 
 debug()
 ipdb.set_trace()

@@ -59,3 +59,15 @@ class Trip(Base):
         :return: The Trip object if found, None otherwise.
         """
         return session.query(cls).filter_by(name=name).first()
+    
+    @staticmethod
+    def delete_trip(trip_id):
+        """
+        Delete a trip from the database.
+
+        :param trip_id: The ID of the trip to delete.
+        """
+        trip = session.query(Trip).get(trip_id)
+        if trip:
+            session.delete(trip)
+            session.commit()
