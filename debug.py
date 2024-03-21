@@ -54,6 +54,18 @@ def debug():
         for destination in destinations:
             print(destination)
 
+    # Retrieve the trip object by its ID
+    trip_to_update = Trip.find_by_id(4)
+    if trip_to_update:
+        new_name = "Updated Trip Name"
+        new_start_date = "2024-03-01"
+        new_end_date = "2024-03-10"
+        new_description = "Updated trip description"
+        Trip.update_trip(4, name=new_name, start_date=new_start_date, end_date=new_end_date, description=new_description)
+        print("Trip updated successfully!")
+    else:
+        print("Trip with ID", 4, "not found.")
+
 
 
 
