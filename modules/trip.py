@@ -88,5 +88,40 @@ class Trip(Base):
         duration = (end_date - start_date).days
 
         return duration
+    
+    @staticmethod
+    def update_trip(trip_id, name=None, start_date=None, end_date=None, description=None):
+        """
+        Update an existing trip in the database.
+
+        :param trip_id: The ID of the trip to update.
+        :param name: (Optional) The new name of the trip.
+        :param start_date: (Optional) The new start date of the trip.
+        :param end_date: (Optional) The new end date of the trip.
+        :param description: (Optional) The new description of the trip.
+        """
+        # Query the trip by ID
+        trip = session.query(Trip).get(trip_id)
+
+        # If the trip is found, update its attributes
+        if trip:
+            if name:
+                trip.name = name
+            if start_date:
+                trip.start_date = start_date
+            if end_date:
+                trip.end_date = end_date
+            if description:
+                trip.description = description
+
+            session.commit()
+
+    def get_destinations(self):
+        """
+        Retrieve all destinations associated with this trip.
+
+        :return: A list of Destination objects representing all destinations for this trip.
+        """
+        return self.destinations
 
 

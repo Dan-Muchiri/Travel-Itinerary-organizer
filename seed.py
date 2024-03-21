@@ -30,7 +30,7 @@ def generate_seed_data():
         trips = []
         for _ in range(5):
             trip = Trip(
-                name=fake.word(),
+                name=fake.country(),
                 start_date=fake.date(),
                 end_date=fake.date(),
                 description=fake.sentence()
@@ -42,7 +42,7 @@ def generate_seed_data():
         destinations = [] 
         for _ in range(10):
             destination = Destination(
-                name=fake.country() + " City",
+                name=fake.city() + " City",
                 trip=fake.random_element(trips)
             )
             destinations.append(destination)
