@@ -126,9 +126,18 @@ def get_destinations():
 def get_description():
     id_ = input("Enter the trip's id: ")
     if trip := Trip.find_by_id(id_):
-        description = Trip.get_description(id_)
-        print(f"Description: {description}")
+        print(f"Trip Name: {trip.name}")
+        print(f"Description: {trip.description}")
     else:
         print("Trip not found.")
 
+def add_destination():
+    name = input("Enter the destination's name: ")
+    trip_id = input("Enter the trip's id: ")
+    trip = Trip.find_by_id(trip_id)
+    if trip:
+        Destination.add_destination(name, trip_id)
+        print(f"Destination '{name}' added to trip '{trip.name}' successfully.")
+    else:
+        print("No trip found with specified ID.")
 

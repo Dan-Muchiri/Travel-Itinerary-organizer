@@ -9,7 +9,8 @@ from helpers import (
     delete_trip,
     get_duration,
     get_description,
-    get_destinations
+    get_destinations,
+    add_destination
 )
 
 
@@ -32,11 +33,14 @@ def main():
         elif choice == "6":
             get_destinations()
         elif choice == "7":
-            create_trip()
+            add_destination()
         elif choice == "8":
-            update_trip()
+            create_trip()
         elif choice == "9":
+            update_trip()
+        elif choice == "10":
             delete_trip()
+        
         
         
         else:
@@ -54,10 +58,11 @@ def menu():
     print("3. Find a trip by it's id")
     print("4: Get a trip's description")
     print("5: Get a trip's duration")
-    print("6: Get a trip's destinations")
-    print("7: Create a new trip")
-    print("8: Update an existing trip")
-    print("9: Delete an existing trip")
+    print("6: Get trip's destinations")
+    print("7: Add a trip's destination")
+    print("8: Create a new trip")
+    print("9: Update an existing trip")
+    print("10: Delete an existing trip")
     
 
 

@@ -76,7 +76,7 @@ def generate_seed_data():
 
         # Generate seed data for destinations, accommodations,
         destinations = [] 
-        for _ in range(10):
+        for _ in range(20):
             destination = Destination(
                 name=fake.city() + " City",
                 trip=fake.random_element(trips)
@@ -84,7 +84,7 @@ def generate_seed_data():
             destinations.append(destination)
             session.add(destination)
 
-        for _ in range(20):
+        for _ in range(40):
             accommodation = Accommodation(
                 name=fake.company(),
                 price=fake.random_number(digits=3),
