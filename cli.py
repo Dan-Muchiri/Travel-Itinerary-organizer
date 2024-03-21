@@ -10,7 +10,12 @@ from helpers import (
     get_duration,
     get_description,
     get_destinations,
-    add_destination
+    add_destination,
+    find_destination_by_name,
+    find_destination_by_id,
+    delete_destination,
+    update_destination,
+    get_accommodations
 )
 
 
@@ -33,13 +38,24 @@ def main():
         elif choice == "6":
             get_destinations()
         elif choice == "7":
-            add_destination()
-        elif choice == "8":
             create_trip()
-        elif choice == "9":
+        elif choice == "8":
             update_trip()
-        elif choice == "10":
+        elif choice == "9":
             delete_trip()
+
+        elif choice == "11":
+            add_destination()
+        elif choice == "12":
+            find_destination_by_name()
+        elif choice == "13":
+            find_destination_by_id()
+        elif choice == "14":
+            get_accommodations()
+        elif choice == "15":
+            update_destination()
+        elif choice == "16":
+            delete_destination()
         
         
         
@@ -49,20 +65,31 @@ def main():
 
 def menu():
     print("")
-    print("Welcome to the trip itinerary organizer!")
+    print("Welcome to the travel itinerary organizer!")
+    print("")
+    print("*****Trips*****")
     print("")
     print("Please select an option:")
-    print("0. Exit the program")
+    print("0. Exit program")
     print("1. List all available trips")
     print("2. Find a trip by it's name")
     print("3. Find a trip by it's id")
     print("4: Get a trip's description")
     print("5: Get a trip's duration")
-    print("6: Get trip's destinations")
-    print("7: Add a trip's destination")
-    print("8: Create a new trip")
-    print("9: Update an existing trip")
-    print("10: Delete an existing trip")
+    print("6: Get a trip's all destinations")
+    print("7: Create a new trip")
+    print("8: Update an existing trip")
+    print("9: Delete an existing trip")
+    print("")
+    print("*****Destinations*****")
+    print("")
+    print("11: Add a new destination")
+    print("12. Find a destination by it's name")
+    print("13. Find a destination by it's id")
+    print("14: Get a destination's all accommodations")
+    print("15: Update an existing destination")
+    print("16: Delete an existing destination")
+    
     
 
 

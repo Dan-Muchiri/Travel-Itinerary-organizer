@@ -4,7 +4,7 @@ from models.destination import Destination
 
 
 def exit_program():
-    print("Goodbye!")
+    print("Thank you for using Travel Itinerary Organizer!")
     exit()
 
 
@@ -141,3 +141,63 @@ def add_destination():
     else:
         print("No trip found with specified ID.")
 
+def find_destination_by_name():
+    name = input("Enter the destination's name: ")
+    destinations = Destination.find_by_name(name)
+    if destinations:
+        print("Destinations found:")
+        for destination in destinations:
+          print(destination)
+    else: 
+        print(f'Destination "{name}" not found')
+
+
+def find_destination_by_id():
+    # Use a trailing underscore not to override the built-in id function
+    id_ = input("Enter the destination's id: ")
+    destination = Destination.find_by_id(id_)
+    if destination:
+        print("Destination found:", destination)
+    else: 
+        print(f'Destination "{id_}" not found')
+
+def delete_destination():
+    id_ = input("Enter the destination's id: ")
+    destination = Destination.find_by_id(id_)
+    if destination:
+        destination_name = destination.name
+        Destination.delete_destination(id_)
+        print(f'Destination "{destination_name}" deleted')
+    else:
+        print(f'Destination "{id_}" not found')
+
+def update_destination():
+    while True:
+        id_ = input("Enter the destination's id: ")
+        destination = Destination.find_by_id(id_)
+        if not destination:
+            print(f'Destination {id_} not found')
+            return
+
+        name = input("Enter the destination's new name: ")
+
+        try:
+            Destination.update_destination(id_, name=name)
+            print(f'Successfully updated destination: {destination}')
+            break
+        except ValueError as ve:
+            print("Error updating destination: ", ve)
+
+def get_accommodations():
+    destination_id = input("Enter the destination's id: ")
+    destination = Destination.find_by_id(destination_id)
+    if destination:
+        accommodations = destination.get_accommodations()
+        if accommodations:
+            print(f"Accommodations for Destination '{destination.name}':")
+            for accommodation in accommodations:
+                print(f"Accommodation: {accommodation.name}, ID: {accommodation.id}")
+        else:
+            print(f"No accommodations found for Destination '{destination.name}'.")
+    else:
+        print("Destination not found.")
