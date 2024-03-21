@@ -3,6 +3,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from init import Base, session
+from .accommodation import Accommodation
+
 
 class Destination(Base):
     __tablename__ = 'destinations'

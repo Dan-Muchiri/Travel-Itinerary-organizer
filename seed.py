@@ -1,6 +1,6 @@
-from modules.trip import Trip
-from modules.accomodation import Accommodation
-from modules.destination import Destination
+from models.trip import Trip
+from models.accommodation import Accommodation
+from models.destination import Destination
 from init import Base, engine
 from faker import Faker
 from sqlalchemy.orm import sessionmaker
