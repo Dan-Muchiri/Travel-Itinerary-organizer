@@ -28,15 +28,51 @@ def generate_seed_data():
     try:
         # Generate seed data for trips
         trips = []
-        for _ in range(5):
-            trip = Trip(
-                name=fake.country(),
-                start_date=fake.date(),
-                end_date=fake.date(),
-                description=fake.sentence()
+        
+        japan = Trip(
+                name='Japan Exploration',
+                start_date='2024-05-15',
+                end_date='2024-05-20',
+                description= 'Experience the unique blend of tradition and modernity in Japan, from bustling Tokyo to serene Kyoto.'
             )
-            trips.append(trip)
-            session.add(trip)
+        trips.append(japan)
+        session.add(japan)
+
+        italy = Trip(
+                name='Italian Odyssey',
+                start_date='2024-06-10',
+                end_date='2024-06-20',
+                description= 'Journey through the historic streets of Italy, from the ancient ruins of Rome to the romantic canals of Venice.'
+            )
+        trips.append(italy)
+        session.add(italy)
+
+        brazil = Trip(
+                name='Brazilian Adventure',
+                start_date='2024-07-10',
+                end_date='2024-07-27',
+                description= 'Embark on an exciting adventure in Brazil, from the vibrant beaches of Rio de Janeiro to the lush Amazon rainforest.'
+            )
+        trips.append(brazil)
+        session.add(brazil)
+
+        thailand = Trip(
+                name='Thailand Escape',
+                start_date='2024-08-01',
+                end_date='2024-08-23',
+                description= 'Explore the rich culture and stunning landscapes of Thailand, from bustling Bangkok to the tranquil islands of Phuket.'
+            )
+        trips.append(thailand)
+        session.add(thailand)
+
+        spain = Trip(
+                name='Spanish Fiesta',
+                start_date='2024-09-01',
+                end_date='2024-10-15',
+                description= ' Immerse yourself in the vibrant culture of Spain, from the lively streets of Barcelona to the historic landmarks of Madrid.'
+            )
+        trips.append(spain)
+        session.add(spain)
 
         # Generate seed data for destinations, accommodations,
         destinations = [] 
@@ -48,6 +84,7 @@ def generate_seed_data():
             destinations.append(destination)
             session.add(destination)
 
+        for _ in range(20):
             accommodation = Accommodation(
                 name=fake.company(),
                 price=fake.random_number(digits=3),

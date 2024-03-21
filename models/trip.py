@@ -60,7 +60,9 @@ class Trip(Base):
         :param name: The name of the trip to find.
         :return: The Trip object if found, None otherwise.
         """
-        return session.query(cls).filter_by(name=name).first()
+        # Use ilike to perform a case-insensitive search and match names that contain the input string
+        return session.query(cls).filter(cls.name.ilike(f"%{name}%")).all()
+
     
     @staticmethod
     def delete_trip(trip_id):
@@ -123,5 +125,22 @@ class Trip(Base):
         :return: A list of Destination objects representing all destinations for this trip.
         """
         return self.destinations
+    
+    @classmethod
+    def get_description(cls, trip_id):
+        """
+        Retrieve the description of a specific trip.
+
+        :param trip_id: The ID of the trip.
+        :return: The description of the trip if found, None otherwise.
+        """
+        # Query the trip by ID
+        trip = session.query(cls).filter_by(id=trip_id).first()
+
+        # If the trip is found, return its description
+        if trip:
+            return trip.description
+        else:
+            return None
 
 

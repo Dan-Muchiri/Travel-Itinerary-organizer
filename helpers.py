@@ -1,3 +1,4 @@
+import datetime
 from models.trip import Trip
 from models.destination import Destination
 
@@ -16,15 +17,17 @@ def list_trips():
 
 def find_trip_by_name():
     name = input("Enter the trip's name: ")
-    trip = Trip.find_by_name(name)
-    if trip:
-        print("Trip found:", trip)
+    trips = Trip.find_by_name(name)
+    if trips:
+        print("Trips found:")
+        for trip in trips:
+          print(trip)
     else: 
         print(f'Trip "{name}" not found')
 
 
 def find_trip_by_id():
-    # use a trailing underscore not to override the built-in id function
+    # Use a trailing underscore not to override the built-in id function
     id_ = input("Enter the trip's id: ")
     trip = Trip.find_by_id(id_)
     if trip:
@@ -34,44 +37,98 @@ def find_trip_by_id():
 
 
 def create_trip():
-    name = input("Enter the trip's name: ")
-    start_date = input("Enter the Trip's start_date in YY-MM-DD format: ")
-    end_date = input("Enter the Trip's start_date in YY-MM-DD format: ")
-    description = input("Enter the trip's description: ")
-    try:
-        trip = Trip.add_trip(name, start_date, end_date, description)
-        print(f'Success: {trip}')
-    except Exception as exc:
-        print("Error creating trip: ", exc)
+    while True:
+        name = input("Enter the trip's name: ")
+        start_date = input("Enter the Trip's start date in YYYY-MM-DD format: ")
+        end_date = input("Enter the Trip's end date in YYYY-MM-DD format: ")
+        description = input("Enter the trip's description: ")
+
+        try:
+            # Validate date format
+            datetime.datetime.strptime(start_date, "%Y-%m-%d")
+            datetime.datetime.strptime(end_date, "%Y-%m-%d")
+            # Ensure end_date is after start_date
+            if end_date <= start_date:
+                raise ValueError("End date must be after start date")
+
+            # If all validations pass, add the trip
+            trip = Trip.add_trip(name, start_date, end_date, description)
+            print(f'Success: "{name}" Trip created')
+            break
+        except ValueError as ve:
+            print("Error creating trip: ", ve)
 
 
 def update_trip():
-    id_ = input("Enter the trip's id: ")
-    if trip := Trip.find_by_id(id_):
-        try:
-            name = input("Enter the trip's new name: ")
-            new_name = name
-            start_date = input("Enter the trip's new start date in YY-MM-DD format: ")
-            new_start_date = start_date
-            end_date = input("Enter the trip's new end date in YY-MM-DD format: ")
-            new_end_date = end_date
-            description = input("Enter the trip's new description: ")
-            new_description = description
+    while True:
+        id_ = input("Enter the trip's id: ")
+        trip = Trip.find_by_id(id_)
+        if not trip:
+            print(f'Trip {id_} not found')
+            return
 
-            Trip.update_trip(id_, name=new_name, start_date=new_start_date, end_date=new_end_date, description=new_description)
-            print(f'Success: {trip}')
-        except Exception as exc:
-            print("Error updating trip: ", exc)
-    else:
-        print(f'Trip {id_} not found')
+        name = input("Enter the trip's new name: ")
+        start_date = input("Enter the trip's new start date in YY-MM-DD format: ")
+        end_date = input("Enter the trip's new end date in YY-MM-DD format: ")
+        description = input("Enter the trip's new description: ")
+
+        try:
+            # Validate date format
+            datetime.datetime.strptime(start_date, "%Y-%m-%d")
+            datetime.datetime.strptime(end_date, "%Y-%m-%d")
+            # Ensure end_date is after start_date
+            if end_date <= start_date:
+                raise ValueError("End date must be after start date")
+
+            # If all validations pass, update the trip
+            Trip.update_trip(id_, name=name, start_date=start_date, end_date=end_date, description=description)
+            print(f'Successfully updated trip: {trip}')
+            break
+        except ValueError as ve:
+            print("Error updating trip: ", ve)
 
 
 def delete_trip():
     id_ = input("Enter the trip's id: ")
-    if trip := Trip.find_by_id(id_):
+    trip = Trip.find_by_id(id_)
+    if trip:
+        trip_name = trip.name
         Trip.delete_trip(id_)
-        print(f'Trip {id_} deleted')
+        print(f'Trip "{trip_name}" deleted')
     else:
-        print(f'Trip {id_} not found')
+        print(f'Trip "{id_}" not found')
+
+
+
+def get_duration():
+    id_ = input("Enter the trip's id: ")
+    if trip := Trip.find_by_id(id_):
+        trip_duration = trip.duration()
+        print(f"The duration of the trip '{trip.name}' is {trip_duration} days.")
+    else:
+        print("Trip not found.")
+
+def get_destinations():
+    trip_id = input("Enter the trip's id: ")
+    trip = Trip.find_by_id(trip_id)
+    if trip:
+        destinations = trip.get_destinations()
+        if destinations:
+            print(f"Destinations for Trip '{trip.name}':")
+            for destination in destinations:
+                print(f"Destination: {destination.name}, ID: {destination.id}")
+        else:
+            print(f"No destinations found for Trip '{trip.name}'.")
+    else:
+        print("Trip not found.")
+
+
+def get_description():
+    id_ = input("Enter the trip's id: ")
+    if trip := Trip.find_by_id(id_):
+        description = Trip.get_description(id_)
+        print(f"Description: {description}")
+    else:
+        print("Trip not found.")
 
 
