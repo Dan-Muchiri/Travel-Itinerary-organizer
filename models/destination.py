@@ -20,7 +20,7 @@ class Destination(Base):
     accommodations = relationship("Accommodation", back_populates="destination")
 
     def __repr__(self):
-        return f"Destination(id={self.id}, name={self.name})"
+        return f"Destination(id={self.id}, name={self.name}, Trip ID={self.trip_id})"
     
     @classmethod
     def add_destination(cls, name, trip_id):
@@ -33,6 +33,15 @@ class Destination(Base):
         new_destination = Destination(name=name, trip_id=trip_id)
         session.add(new_destination)
         session.commit()
+
+    @classmethod
+    def get_all_destinations(cls):
+        """
+        Retrieve all destinations from the database.
+
+        :return: A list of Destinations objects representing all destinations.
+        """
+        return session.query(cls).all()
 
     @classmethod
     def find_by_id(cls, destination_id):

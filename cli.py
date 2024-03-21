@@ -15,7 +15,8 @@ from helpers import (
     find_destination_by_id,
     delete_destination,
     update_destination,
-    get_accommodations
+    get_accommodations,
+    list_destinations
 )
 
 
@@ -43,7 +44,8 @@ def main():
             update_trip()
         elif choice == "9":
             delete_trip()
-
+        elif choice == "10":
+            list_destinations()
         elif choice == "11":
             add_destination()
         elif choice == "12":
@@ -56,19 +58,15 @@ def main():
             update_destination()
         elif choice == "16":
             delete_destination()
-        
-        
-        
         else:
             print("Invalid choice")
 
 
 def menu():
     print("")
-    print("Welcome to the travel itinerary organizer!")
+    print("*Welcome to the travel itinerary organizer!*")
     print("")
-    print("*****Trips*****")
-    print("")
+    print("********Trips********")
     print("Please select an option:")
     print("0. Exit program")
     print("1. List all available trips")
@@ -82,7 +80,7 @@ def menu():
     print("9: Delete an existing trip")
     print("")
     print("*****Destinations*****")
-    print("")
+    print("10: List all available destinations")
     print("11: Add a new destination")
     print("12. Find a destination by it's name")
     print("13. Find a destination by it's id")

@@ -201,3 +201,9 @@ def get_accommodations():
             print(f"No accommodations found for Destination '{destination.name}'.")
     else:
         print("Destination not found.")
+
+def list_destinations():
+    all_destinations = Destination.get_all_destinations()
+    print("All destinations:")
+    for destination in all_destinations:
+        print(destination)
