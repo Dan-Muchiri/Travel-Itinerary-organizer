@@ -16,7 +16,9 @@ from helpers import (
     delete_destination,
     update_destination,
     get_accommodations,
-    list_destinations
+    list_destinations,
+    find_most_expensive_accommodation,
+    find_cheapest_accommodation
 )
 
 
@@ -27,68 +29,119 @@ def main():
         if choice == "0":
             exit_program()
         elif choice == "1":
-            list_trips()
+            trips_menu()
+            handle_trips_menu()
         elif choice == "2":
-            find_trip_by_name()
+            destinations_menu()
+            handle_destinations_menu()
         elif choice == "3":
-            find_trip_by_id()
+            exit_program()
         elif choice == "4":
-            get_description()
+            exit_program()
+        else:
+            print("Invalid choice")
+
+def handle_trips_menu():
+    while True:
+        choice = input("Trips Menu > ")
+        if choice == "0":
+            return
         elif choice == "5":
-            get_duration()
+            list_trips()
         elif choice == "6":
-            get_destinations()
+            find_trip_by_name()
         elif choice == "7":
-            create_trip()
+            find_trip_by_id()
         elif choice == "8":
-            update_trip()
+            get_description()
         elif choice == "9":
-            delete_trip()
+            get_duration()
         elif choice == "10":
-            list_destinations()
+            get_destinations()
         elif choice == "11":
-            add_destination()
+            create_trip()
         elif choice == "12":
-            find_destination_by_name()
+            update_trip()
         elif choice == "13":
-            find_destination_by_id()
+            delete_trip()
+        else:
+            print("Invalid choice")
+
+def handle_destinations_menu():
+    while True:
+        choice = input("Destinations Menu > ")
+        if choice == "0":
+            return
         elif choice == "14":
-            get_accommodations()
+            list_destinations()
         elif choice == "15":
-            update_destination()
+            add_destination()
         elif choice == "16":
+            find_destination_by_name()
+        elif choice == "17":
+            find_destination_by_id()
+        elif choice == "18":
+            get_accommodations()
+        elif choice == "19":
+            find_most_expensive_accommodation()
+        elif choice == "20":
+            find_cheapest_accommodation()
+        elif choice == "21":
+            update_destination()
+        elif choice == "22":
             delete_destination()
         else:
             print("Invalid choice")
 
 
+
 def menu():
     print("")
-    print("*Welcome to the travel itinerary organizer!*")
+    print("***************Welcome to the travel itinerary organizer!***************")
+    print("***********************Browse your planned trips!***********************")
+    print("*****************Trips have many destinations to visit!*****************")
+    print("*The destinations have many accomodations to stay and activities to do!*")
+    print("")
+    print("********Menu********")
+    print("Please select an option:")
+    print("1. Trips Menu")
+    print("2. Destinations Menu")
+    print("3. Accommodations Menu")
+    print("4. Activities Menu")
+    print("0. Exit program")
+    
+    
+    
+    
+def trips_menu():
     print("")
     print("********Trips********")
     print("Please select an option:")
-    print("0. Exit program")
-    print("1. List all available trips")
-    print("2. Find a trip by it's name")
-    print("3. Find a trip by it's id")
-    print("4: Get a trip's description")
-    print("5: Get a trip's duration")
-    print("6: Get a trip's all destinations")
-    print("7: Create a new trip")
-    print("8: Update an existing trip")
-    print("9: Delete an existing trip")
+    print("5. List all available trips")
+    print("6. Find a trip by it's name")
+    print("7. Find a trip by it's id")
+    print("8: Get a trip's description")
+    print("9: Get a trip's duration")
+    print("10: Get a trip's all destinations")
+    print("11: Create a new trip")
+    print("12: Update an existing trip")
+    print("13: Delete an existing trip")
+    print("0. Return to Main Menu")
+
+def destinations_menu():
     print("")
     print("*****Destinations*****")
-    print("10: List all available destinations")
-    print("11: Add a new destination")
-    print("12. Find a destination by it's name")
-    print("13. Find a destination by it's id")
-    print("14: Get a destination's all accommodations")
-    print("15: Update an existing destination")
-    print("16: Delete an existing destination")
-    
-    
+    print("Please select an option:")
+    print("14: List all available destinations")
+    print("15: Add a new destination")
+    print("16. Find a destination by it's name")
+    print("17. Find a destination by it's id")
+    print("18: Get a destination's all accommodations")
+    print("19: Find a destination's most expensive accommodation")
+    print("20: Find a destination's cheapest accommodation")
+    print("21: Update an existing destination")
+    print("22: Delete an existing destination")
+    print("0. Return to Main Menu")
 
 
 if __name__ == "__main__":

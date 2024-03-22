@@ -97,3 +97,22 @@ class Destination(Base):
         """
         return self.accommodations
     
+    @staticmethod
+    def get_most_expensive_accommodation(destination_id):
+        """
+        Retrieve the most expensive accommodation associated with a destination.
+
+        :param destination_id: The ID of the destination.
+        :return: The Accommodation object representing the most expensive accommodation for the destination.
+        """
+        return session.query(Accommodation).filter_by(destination_id=destination_id).order_by(Accommodation.price.desc()).first()
+    
+    @staticmethod
+    def get_cheapest_accommodation(destination_id):
+        """
+        Retrieve the cheapest accommodation associated with a destination.
+
+        :param destination_id: The ID of the destination.
+        :return: The Accommodation object representing the cheapest accommodation for the destination.
+        """
+        return session.query(Accommodation).filter_by(destination_id=destination_id).order_by(Accommodation.price.asc()).first()

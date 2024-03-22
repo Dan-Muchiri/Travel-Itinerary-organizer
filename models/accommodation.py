@@ -15,5 +15,5 @@ class Accommodation(Base):
     destination = relationship("Destination", back_populates="accommodations")
 
     def __repr__(self):
-        return f"Accommodation(id={self.id}, name={self.name})"
+        return f"Accommodation(id={self.id}, name={self.name}, Price={self.price})"
 

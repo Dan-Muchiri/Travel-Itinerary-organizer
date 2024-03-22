@@ -196,7 +196,7 @@ def get_accommodations():
         if accommodations:
             print(f"Accommodations for Destination '{destination.name}':")
             for accommodation in accommodations:
-                print(f"Accommodation: {accommodation.name}, ID: {accommodation.id}")
+                print(f"Accommodation: {accommodation.name}, ID: {accommodation.id}, Price:{accommodation.price}")
         else:
             print(f"No accommodations found for Destination '{destination.name}'.")
     else:
@@ -207,3 +207,29 @@ def list_destinations():
     print("All destinations:")
     for destination in all_destinations:
         print(destination)
+
+def find_most_expensive_accommodation():
+    destination_id = input("Enter the destination's id: ")
+    destination = Destination.find_by_id(destination_id)
+    if destination:
+        most_expensive_accommodation = destination.get_most_expensive_accommodation(destination_id)
+        if most_expensive_accommodation:
+            print(f"Most Expensive Accommodation for Destination '{destination.name}':")
+            print(f"Accommodation: {most_expensive_accommodation.name}, Price: {most_expensive_accommodation.price}")
+        else:
+            print(f"No accommodations found for Destination '{destination.name}'.")
+    else:
+        print("Destination not found.")
+
+def find_cheapest_accommodation():
+    destination_id = input("Enter the destination's id: ")
+    destination = Destination.find_by_id(destination_id)
+    if destination:
+        cheapest_accommodation = destination.get_cheapest_accommodation(destination_id)
+        if cheapest_accommodation:
+            print(f"Cheapest Accommodation for Destination '{destination.name}':")
+            print(f"Accommodation: {cheapest_accommodation.name}, Price: {cheapest_accommodation.price}")
+        else:
+            print(f"No accommodations found for Destination '{destination.name}'.")
+    else:
+        print("Destination not found.")
