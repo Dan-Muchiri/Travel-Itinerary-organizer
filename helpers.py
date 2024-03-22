@@ -338,3 +338,32 @@ def get_notes():
         print(f"Notes: {accommodation.notes}")
     else:
         print("Accommodation not found.")
+
+def get_five_most_expensive_accommodations():
+    """
+    Retrieve the 5 most expensive accommodations.
+
+    :return: A list of Accommodation objects representing the 5 most expensive accommodations.
+    """
+    accommodations = Accommodation.get_five_most_expensive_accommodations()
+    if accommodations:
+        print("Five most expensive accommodations:")
+        for accommodation in accommodations:
+            print(f"Accommodation: {accommodation.name}, Price: {accommodation.price}")
+    else:
+        print("No accommodations found.")
+
+def get_five_cheapest_accommodations():
+    """
+    Retrieve the 5 cheapest accommodations.
+
+    :return: A list of Accommodation objects representing the 5 cheapest accommodations.
+    """
+    accommodations = Accommodation.get_five_cheapest_accommodations()
+    if accommodations:
+        print("Five cheapest accommodations:")
+        for accommodation in accommodations:
+            print(f"Accommodation: {accommodation.name}, Price: {accommodation.price}")
+    else:
+        print("No accommodations found.")
+

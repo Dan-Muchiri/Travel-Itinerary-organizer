@@ -25,7 +25,9 @@ from helpers import (
     add_accommodation,
     delete_accommodation,
     update_accommodation,
-    get_notes
+    get_notes,
+    get_five_cheapest_accommodations,
+    get_five_most_expensive_accommodations
 )
 
 
@@ -117,8 +119,12 @@ def handle_accommodations_menu():
         elif choice == "27":
             get_notes()
         elif choice == "28":
-            update_accommodation()
+            get_five_most_expensive_accommodations()
         elif choice == "29":
+            get_five_cheapest_accommodations()
+        elif choice == "30":
+            update_accommodation()
+        elif choice == "31":
             delete_accommodation()
         else:
             print("Invalid choice")
@@ -179,8 +185,10 @@ def accommodations_menu():
     print("25. Find an accommodation by it's name")
     print("26. Find an accommodation by it's id")
     print("27: Get an accommodation's notes")
-    print("28: Update an existing accommodation")
-    print("29: Delete an existing accommodation")
+    print("28: List the top 5 most expensive accommodations")
+    print("29: List the top 5 cheapest accommodations")
+    print("30: Update an existing accommodation")
+    print("31: Delete an existing accommodation")
     print("0: Return to Main Menu")
 
 

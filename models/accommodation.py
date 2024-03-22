@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, desc
 from sqlalchemy.orm import relationship
 from init import Base, session
 
@@ -112,3 +112,21 @@ class Accommodation(Base):
             return accommodation.notes
         else:
             return None
+
+    @classmethod
+    def get_five_most_expensive_accommodations(cls):
+        """
+        Retrieve the 5 most expensive accommodations.
+
+        :return: A list of Accommodation objects representing the 5 most expensive accommodations.
+        """
+        return session.query(cls).order_by(desc(cls.price)).limit(5).all()
+
+    @classmethod
+    def get_five_cheapest_accommodations(cls):
+        """
+        Retrieve the 5 cheapest accommodations.
+
+        :return: A list of Accommodation objects representing the 5 cheapest accommodations.
+        """
+        return session.query(cls).order_by(cls.price).limit(5).all()
