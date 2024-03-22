@@ -76,17 +76,21 @@ class Destination(Base):
             session.commit()
 
     @staticmethod
-    def update_destination(destination_id, name=None):
+    def update_destination(destination_id, name=None, trip_id=None):
         """
         Update an existing destination in the database.
 
         :param destination_id: The ID of the destination to update.
         :param name: (Optional) The new name of the destination.
+        :param trip_id: (Optional) The new trip of the destination.
         """
         destination = session.query(Destination).get(destination_id)
         if destination:
             if name:
                 destination.name = name
+            if trip_id:
+                destination.trip_id = trip_id
+
             session.commit()
 
     def get_accommodations(self):

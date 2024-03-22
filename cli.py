@@ -18,7 +18,14 @@ from helpers import (
     get_accommodations,
     list_destinations,
     find_most_expensive_accommodation,
-    find_cheapest_accommodation
+    find_cheapest_accommodation,
+    list_accommodations,
+    find_accommodation_by_id,
+    find_accommodation_by_name,
+    add_accommodation,
+    delete_accommodation,
+    update_accommodation,
+    get_notes
 )
 
 
@@ -35,7 +42,8 @@ def main():
             destinations_menu()
             handle_destinations_menu()
         elif choice == "3":
-            exit_program()
+            accommodations_menu()
+            handle_accommodations_menu()
         elif choice == "4":
             exit_program()
         else:
@@ -93,6 +101,28 @@ def handle_destinations_menu():
         else:
             print("Invalid choice")
 
+def handle_accommodations_menu():
+    while True:
+        choice = input("Accommodations Menu > ")
+        if choice == "0":
+            return
+        elif choice == "23":
+            list_accommodations()
+        elif choice == "24":
+            add_accommodation()
+        elif choice == "25":
+            find_accommodation_by_name()
+        elif choice == "26":
+            find_accommodation_by_id()
+        elif choice == "27":
+            get_notes()
+        elif choice == "28":
+            update_accommodation()
+        elif choice == "29":
+            delete_accommodation()
+        else:
+            print("Invalid choice")
+
 
 
 def menu():
@@ -104,14 +134,11 @@ def menu():
     print("")
     print("********Menu********")
     print("Please select an option:")
-    print("1. Trips Menu")
-    print("2. Destinations Menu")
-    print("3. Accommodations Menu")
-    print("4. Activities Menu")
-    print("0. Exit program")
-    
-    
-    
+    print("1: Trips Menu")
+    print("2: Destinations Menu")
+    print("3: Accommodations Menu")
+    print("4: Activities Menu")
+    print("0: Exit program")
     
 def trips_menu():
     print("")
@@ -126,7 +153,7 @@ def trips_menu():
     print("11: Create a new trip")
     print("12: Update an existing trip")
     print("13: Delete an existing trip")
-    print("0. Return to Main Menu")
+    print("0: Return to Main Menu")
 
 def destinations_menu():
     print("")
@@ -141,7 +168,20 @@ def destinations_menu():
     print("20: Find a destination's cheapest accommodation")
     print("21: Update an existing destination")
     print("22: Delete an existing destination")
-    print("0. Return to Main Menu")
+    print("0: Return to Main Menu")
+
+def accommodations_menu():
+    print("")
+    print("****Accommodations****")
+    print("Please select an option:")
+    print("23: List all available accommodations")
+    print("24: Add a new accommodation")
+    print("25. Find an accommodation by it's name")
+    print("26. Find an accommodation by it's id")
+    print("27: Get an accommodation's notes")
+    print("28: Update an existing accommodation")
+    print("29: Delete an existing accommodation")
+    print("0: Return to Main Menu")
 
 
 if __name__ == "__main__":

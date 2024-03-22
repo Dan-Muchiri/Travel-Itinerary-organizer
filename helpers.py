@@ -1,6 +1,7 @@
 import datetime
 from models.trip import Trip
 from models.destination import Destination
+from models.accommodation import Accommodation
 
 
 def exit_program():
@@ -180,13 +181,21 @@ def update_destination():
             return
 
         name = input("Enter the destination's new name: ")
+        trip_id = input("Enter the destination's new trip id: ")
+
+        # Check if the trip ID exists
+        if not Trip.find_by_id(trip_id):
+            print(f'Trip with id {trip_id} not found')
+            continue
 
         try:
-            Destination.update_destination(id_, name=name)
+            Destination.update_destination(id_, name=name, trip_id=trip_id)
             print(f'Successfully updated destination: {destination}')
             break
         except ValueError as ve:
             print("Error updating destination: ", ve)
+
+
 
 def get_accommodations():
     destination_id = input("Enter the destination's id: ")
@@ -233,3 +242,99 @@ def find_cheapest_accommodation():
             print(f"No accommodations found for Destination '{destination.name}'.")
     else:
         print("Destination not found.")
+
+def list_accommodations():
+    all_accommodations = Accommodation.get_all_accommodations()
+    print("All accommodations:")
+    for accommodation in all_accommodations:
+        print(accommodation)
+
+def find_accommodation_by_name():
+    name = input("Enter the accommodation's name: ")
+    accommodations = Accommodation.find_by_name(name)
+    if accommodations:
+        print("Accommodations found:")
+        for accommodation in accommodations:
+          print(accommodation)
+    else: 
+        print(f'Accommodation "{name}" not found')
+
+
+def find_accommodation_by_id():
+    # Use a trailing underscore not to override the built-in id function
+    id_ = input("Enter the accommodation's id: ")
+    accommodation = Accommodation.find_by_id(id_)
+    if accommodation:
+        print("Accommodation found:", accommodation)
+    else: 
+        print(f'Accommodation "{id_}" not found')
+
+def add_accommodation():
+    name = input("Enter the accommodation's name: ")
+    destination_id = input("Enter the destination's id: ")
+    destination = Destination.find_by_id(destination_id)
+    if destination:
+        notes = input("Enter any notes about the accommodation (optional): ")
+        price = input("Enter the price of the accommodation (optional): ")
+
+        if price:
+            try:
+                price = float(price)
+            except ValueError:
+                print("Invalid price. Please enter a valid number.")
+                return
+
+        Accommodation.add_accommodation(name, destination_id, notes=notes, price=price)
+        print(f"Accommodation '{name}' added to destination '{destination.name}' successfully.")
+    else:
+        print("No destination found with specified ID.")
+
+def delete_accommodation():
+    id_ = input("Enter the accommodation's id: ")
+    accommodation = Accommodation.find_by_id(id_)
+    if accommodation:
+        accommodation_name = accommodation.name
+        Accommodation.delete_accommodation(id_)
+        print(f'Accommodation "{accommodation_name}" deleted')
+    else:
+        print(f'Accommodation "{id_}" not found')
+
+
+def update_accommodation():
+    accommodation_id = input("Enter the accommodation's ID: ")
+    accommodation = Accommodation.find_by_id(accommodation_id)
+    
+    if not accommodation:
+        print(f"Accommodation with ID {accommodation_id} not found.")
+        return
+    
+    print(f"Updating accommodation with ID {accommodation_id}:")
+    name = input("Enter the new name of the accommodation (leave empty to keep current): ")
+    price = input("Enter the new price of the accommodation (leave empty to keep current): ")
+    notes = input("Enter the new notes of the accommodation (leave empty to keep current): ")
+    destination_id = input("Enter the new destination ID of the accommodation (leave empty to keep current): ")
+    
+    try:
+        if name:
+            accommodation.name = name
+        if price:
+            accommodation.price = float(price)
+        if notes:
+            accommodation.notes = notes
+        if destination_id:
+            accommodation.destination_id = destination_id
+
+        accommodation.update_accommodation(accommodation_id, name=name, price=price, notes=notes, destination_id=destination_id)
+        print(f"Accommodation with ID {accommodation_id} updated successfully.")
+    except ValueError as ve:
+        print("Error updating accommodation: ", ve)
+        if "could not convert string to float" in str(ve):
+            print("Price must be a number.")
+
+def get_notes():
+    id_ = input("Enter the accommodation's id: ")
+    if accommodation := Accommodation.find_by_id(id_):
+        print(f"Accommodation Name: {accommodation.name}")
+        print(f"Notes: {accommodation.notes}")
+    else:
+        print("Accommodation not found.")
