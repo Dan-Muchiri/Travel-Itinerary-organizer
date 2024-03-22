@@ -1,6 +1,7 @@
 from models.trip import Trip
 from models.accommodation import Accommodation
 from models.destination import Destination
+from models.activity import Activity
 from init import Base, engine
 from faker import Faker
 from sqlalchemy.orm import sessionmaker
@@ -84,6 +85,8 @@ def generate_seed_data():
             destinations.append(destination)
             session.add(destination)
 
+         # Generate seed data for accommodations
+        accommodations = []
         for _ in range(40):
             accommodation = Accommodation(
                 name=fake.company(),
@@ -91,7 +94,20 @@ def generate_seed_data():
                 notes=fake.sentence(),
                 destination=fake.random_element(destinations)
             )
+            accommodations.append(accommodation)
             session.add(accommodation)
+
+        # Generate seed data for activities
+        activities = []
+        for _ in range(40):
+            activity = Activity(
+                name=fake.word(),
+                description=fake.text(),
+                destination=fake.random_element(destinations),
+                rating=fake.random_int(min=1, max=5)
+            )
+            activities.append(activity)
+            session.add(activity)
 
 
         # Commit the changes

@@ -19,6 +19,9 @@ class Destination(Base):
     # Relationship with Accommodation (one-to-many)
     accommodations = relationship("Accommodation", back_populates="destination")
 
+    # Relationship with Activity (one-to-many)
+    activities = relationship("Activity", back_populates="destination")
+
     def __repr__(self):
         return f"Destination(id={self.id}, name={self.name}, Trip ID={self.trip_id})"
     
