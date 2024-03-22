@@ -33,7 +33,8 @@ from helpers import (
     find_activity_by_name,
     create_activity,
     update_activity,
-    delete_activity
+    delete_activity,
+    get_activities
 )
 
 
@@ -100,12 +101,14 @@ def handle_destinations_menu():
         elif choice == "18":
             get_accommodations()
         elif choice == "19":
-            find_most_expensive_accommodation()
+            get_activities()
         elif choice == "20":
-            find_cheapest_accommodation()
+            find_most_expensive_accommodation()
         elif choice == "21":
-            update_destination()
+            find_cheapest_accommodation()
         elif choice == "22":
+            update_destination()
+        elif choice == "23":
             delete_destination()
         else:
             print("Invalid choice")
@@ -115,23 +118,23 @@ def handle_accommodations_menu():
         choice = input("Accommodations Menu > ")
         if choice == "0":
             return
-        elif choice == "23":
-            list_accommodations()
         elif choice == "24":
-            add_accommodation()
+            list_accommodations()
         elif choice == "25":
-            find_accommodation_by_name()
+            add_accommodation()
         elif choice == "26":
-            find_accommodation_by_id()
+            find_accommodation_by_name()
         elif choice == "27":
-            get_notes()
+            find_accommodation_by_id()
         elif choice == "28":
-            get_five_most_expensive_accommodations()
+            get_notes()
         elif choice == "29":
-            get_five_cheapest_accommodations()
+            get_five_most_expensive_accommodations()
         elif choice == "30":
-            update_accommodation()
+            get_five_cheapest_accommodations()
         elif choice == "31":
+            update_accommodation()
+        elif choice == "32":
             delete_accommodation()
         else:
             print("Invalid choice")
@@ -141,17 +144,17 @@ def handle_activities_menu():
         choice = input("Activities Menu > ")
         if choice == "0":
             return
-        elif choice == "32":
-            list_activities()
         elif choice == "33":
-            create_activity()
+            list_activities()
         elif choice == "34":
-            find_activity_by_name()
+            create_activity()
         elif choice == "35":
-            find_activity_by_id()
+            find_activity_by_name()
         elif choice == "36":
-            update_activity()
+            find_activity_by_id()
         elif choice == "37":
+            update_activity()
+        elif choice == "38":
             delete_activity()
         else:
             print("Invalid choice")
@@ -196,38 +199,39 @@ def destinations_menu():
     print("15: Add a new destination")
     print("16. Find a destination by it's name")
     print("17. Find a destination by it's id")
-    print("18: Get a destination's all accommodations")
-    print("19: Find a destination's most expensive accommodation")
-    print("20: Find a destination's cheapest accommodation")
-    print("21: Update an existing destination")
-    print("22: Delete an existing destination")
+    print("18: Get a destination's all activities")
+    print("19: Get a destination's all accommodations")
+    print("20: Find a destination's most expensive accommodation")
+    print("21: Find a destination's cheapest accommodation")
+    print("22: Update an existing destination")
+    print("23: Delete an existing destination")
     print("0: Return to Main Menu")
 
 def accommodations_menu():
     print("")
     print("****Accommodations****")
     print("Please select an option:")
-    print("23: List all available accommodations")
-    print("24: Add a new accommodation")
-    print("25. Find an accommodation by it's name")
-    print("26. Find an accommodation by it's id")
-    print("27: Get an accommodation's notes")
-    print("28: List the top 5 most expensive accommodations")
-    print("29: List the top 5 cheapest accommodations")
-    print("30: Update an existing accommodation")
-    print("31: Delete an existing accommodation")
+    print("24: List all available accommodations")
+    print("25: Add a new accommodation")
+    print("26. Find an accommodation by it's name")
+    print("27. Find an accommodation by it's id")
+    print("28: Get an accommodation's notes")
+    print("29: List the top 5 most expensive accommodations")
+    print("30: List the top 5 cheapest accommodations")
+    print("31: Update an existing accommodation")
+    print("32: Delete an existing accommodation")
     print("0: Return to Main Menu")
 
 def activities_menu():
     print("")
     print("*****Activities*****")
     print("Please select an option:")
-    print("32: List all available activities")
-    print("33: Add a new activity")
-    print("34. Find an activity by it's name")
-    print("35. Find an activity by it's id")
-    print("36: Update an existing activity")
-    print("37: Delete an existing activity")
+    print("33: List all available activities")
+    print("34: Add a new activity")
+    print("35. Find an activity by it's name")
+    print("36. Find an activity by it's id")
+    print("37: Update an existing activity")
+    print("38: Delete an existing activity")
     print("0: Return to Main Menu")
 
 

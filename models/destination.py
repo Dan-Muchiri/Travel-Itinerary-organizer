@@ -123,3 +123,11 @@ class Destination(Base):
         :return: The Accommodation object representing the cheapest accommodation for the destination.
         """
         return session.query(Accommodation).filter_by(destination_id=destination_id).order_by(Accommodation.price.asc()).first()
+
+    def get_activities(self):
+        """
+        Retrieve all activities associated with this destination.
+
+        :return: A list of Activity objects representing all activities for this destination.
+        """
+        return self.activities

@@ -98,12 +98,4 @@ class Activity(Base):
 
             session.commit()
 
-    @classmethod
-    def get_activities_by_destination(cls, destination_id):
-        """
-        Retrieve all activities associated with a specific destination.
-
-        :param destination_id: The ID of the destination.
-        :return: A list of Activity objects associated with the destination.
-        """
-        return session.query(cls).filter_by(destination_id=destination_id).all()
+    

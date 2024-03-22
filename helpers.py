@@ -447,4 +447,18 @@ def delete_activity():
     else:
         print(f'Activity "{id_}" not found')
 
+def get_activities():
+    destination_id = input("Enter the destination's id: ")
+    destination = Destination.find_by_id(destination_id)
+    if destination:
+        activities = destination.get_activities()
+        if activities:
+            print(f"Activities for Destination '{destination.name}':")
+            for activity in activities:
+                print(f"Activity: {activity.name}, ID: {activity.id}, Rating:{activity.rating}")
+        else:
+            print(f"No activities found for Destination '{destination.name}'.")
+    else:
+        print("Destination not found.")
+
 
