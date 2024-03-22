@@ -27,7 +27,13 @@ from helpers import (
     update_accommodation,
     get_notes,
     get_five_cheapest_accommodations,
-    get_five_most_expensive_accommodations
+    get_five_most_expensive_accommodations,
+    list_activities,
+    find_activity_by_id,
+    find_activity_by_name,
+    create_activity,
+    update_activity,
+    delete_activity
 )
 
 
@@ -47,7 +53,8 @@ def main():
             accommodations_menu()
             handle_accommodations_menu()
         elif choice == "4":
-            exit_program()
+            activities_menu()
+            handle_activities_menu()
         else:
             print("Invalid choice")
 
@@ -129,6 +136,26 @@ def handle_accommodations_menu():
         else:
             print("Invalid choice")
 
+def handle_activities_menu():
+    while True:
+        choice = input("Activities Menu > ")
+        if choice == "0":
+            return
+        elif choice == "32":
+            list_activities()
+        elif choice == "33":
+            create_activity()
+        elif choice == "34":
+            find_activity_by_name()
+        elif choice == "35":
+            find_activity_by_id()
+        elif choice == "36":
+            update_activity()
+        elif choice == "37":
+            delete_activity()
+        else:
+            print("Invalid choice")
+
 
 
 def menu():
@@ -189,6 +216,18 @@ def accommodations_menu():
     print("29: List the top 5 cheapest accommodations")
     print("30: Update an existing accommodation")
     print("31: Delete an existing accommodation")
+    print("0: Return to Main Menu")
+
+def activities_menu():
+    print("")
+    print("*****Activities*****")
+    print("Please select an option:")
+    print("32: List all available activities")
+    print("33: Add a new activity")
+    print("34. Find an activity by it's name")
+    print("35. Find an activity by it's id")
+    print("36: Update an existing activity")
+    print("37: Delete an existing activity")
     print("0: Return to Main Menu")
 
 

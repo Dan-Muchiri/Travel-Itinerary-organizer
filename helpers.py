@@ -2,6 +2,7 @@ import datetime
 from models.trip import Trip
 from models.destination import Destination
 from models.accommodation import Accommodation
+from models.activity import Activity
 
 
 def exit_program():
@@ -366,4 +367,84 @@ def get_five_cheapest_accommodations():
             print(f"Accommodation: {accommodation.name}, Price: {accommodation.price}")
     else:
         print("No accommodations found.")
+
+def list_activities():
+    all_activities = Activity.get_all_activities()
+    if all_activities:
+        print("All activities:")
+        for activity in all_activities:
+            print(activity)
+    else:
+        print("No activities found.")
+
+def find_activity_by_name():
+    name = input("Enter the activity's name: ")
+    activities = Activity.find_by_name(name)
+    if activities:
+        print("Activities found:")
+        for activity in activities:
+            print(activity)
+    else:
+        print(f'Activity "{name}" not found')
+
+def find_activity_by_id():
+    id_ = input("Enter the activity's id: ")
+    activity = Activity.find_by_id(id_)
+    if activity:
+        print("Activity found:", activity)
+    else:
+        print(f'Activity "{id_}" not found')
+
+def create_activity():
+    while True:
+        name = input("Enter the activity's name: ")
+        destination_id = input("Enter the destination's id: ")
+        description = input("Enter the activity's description: ")
+        rating = input("Enter the activity's rating (1 to 5 stars): ")
+
+        try:
+            rating = int(rating)
+            if rating < 1 or rating > 5:
+                raise ValueError("Rating must be between 1 and 5")
+
+            Activity.add_activity(name, destination_id, description, rating)
+            print(f'Success: "{name}" Activity created')
+            break
+        except ValueError as ve:
+            print("Error creating activity: ", ve)
+
+def update_activity():
+    while True:
+        id_ = input("Enter the activity's id: ")
+        activity = Activity.find_by_id(id_)
+        if not activity:
+            print(f'Activity {id_} not found')
+            return
+
+        name = input("Enter the activity's new name: ")
+        description = input("Enter the activity's new description: ")
+        rating = input("Enter the activity's new rating (1 to 5 stars): ")
+
+        try:
+            if rating:
+                rating = int(rating)
+                if rating < 1 or rating > 5:
+                    raise ValueError("Rating must be between 1 and 5")
+
+            Activity.update_activity(id_, name=name, description=description, rating=rating)
+            print(f'Successfully updated activity: {activity}')
+            break
+        except ValueError as ve:
+            print("Error updating activity: ", ve)
+
+def delete_activity():
+    id_ = input("Enter the activity's id: ")
+    activity = Activity.find_by_id(id_)
+    if activity:
+        activity_name = activity.name
+        Activity.delete_activity(id_)
+        print(f'Activity "{activity_name}" deleted')
+    else:
+        print(f'Activity "{id_}" not found')
+
 
