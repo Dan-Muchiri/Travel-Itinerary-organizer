@@ -1,13 +1,10 @@
 from models.trip import Trip
-from models.accommodation import Accommodation
-from models.destination import Destination
 from init import Base, engine
 import ipdb
 
 
 def debug():
 
-    # Retrieve all trips
     all_trips = Trip.get_all_trips()
     print("All trips:")
     for trip in all_trips:
@@ -15,7 +12,6 @@ def debug():
 
     my_trip = Trip.add_trip(name="Trip to Paris", start_date="2024-04-01", end_date="2024-04-10", description="Exploring the beautiful city of Paris")
 
-    # Retrieve all trips
     all_trips = Trip.get_all_trips()
     print("All trips:")
     for trip in all_trips:
@@ -35,7 +31,7 @@ def debug():
 
     Trip.delete_trip(5)
 
-    # Retrieve all trips
+
     all_trips = Trip.get_all_trips()
     print("All trips:")
     for trip in all_trips:
@@ -54,7 +50,7 @@ def debug():
         for destination in destinations:
             print(destination)
 
-    # Retrieve the trip object by its ID
+
     trip_to_update = Trip.find_by_id(4)
     if trip_to_update:
         new_name = "Updated Trip Name"

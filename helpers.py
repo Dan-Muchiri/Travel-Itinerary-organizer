@@ -69,25 +69,29 @@ def update_trip():
             print(f'Trip {id_} not found')
             return
 
-        name = input("Enter the trip's new name: ")
-        start_date = input("Enter the trip's new start date in YY-MM-DD format: ")
-        end_date = input("Enter the trip's new end date in YY-MM-DD format: ")
-        description = input("Enter the trip's new description: ")
+        name = input("Enter the trip's new name (press Enter to keep current name): ")
+        start_date = input("Enter the trip's new start date in YY-MM-DD format (press Enter to keep current start date): ")
+        end_date = input("Enter the trip's new end date in YY-MM-DD format (press Enter to keep current end date): ")
+        description = input("Enter the trip's new description (press Enter to keep current description): ")
 
         try:
-            # Validate date format
-            datetime.datetime.strptime(start_date, "%Y-%m-%d")
-            datetime.datetime.strptime(end_date, "%Y-%m-%d")
-            # Ensure end_date is after start_date
-            if end_date <= start_date:
-                raise ValueError("End date must be after start date")
+            # Validate date format if entered
+            if start_date:
+                datetime.datetime.strptime(start_date, "%Y-%m-%d")
+            if end_date:
+                datetime.datetime.strptime(end_date, "%Y-%m-%d")
+                # Ensure end_date is after start_date if both are entered
+                if start_date and end_date and end_date <= start_date:
+                    raise ValueError("End date must be after start date")
 
-            # If all validations pass, update the trip
-            Trip.update_trip(id_, name=name, start_date=start_date, end_date=end_date, description=description)
+            
+            Trip.update_trip(id_, name=name or trip.name, start_date=start_date or trip.start_date, 
+                             end_date=end_date or trip.end_date, description=description or trip.description)
             print(f'Successfully updated trip: {trip}')
             break
         except ValueError as ve:
             print("Error updating trip: ", ve)
+
 
 
 def delete_trip():
@@ -404,14 +408,24 @@ def create_activity():
 
         try:
             rating = int(rating)
-            if rating < 1 or rating > 5:
-                raise ValueError("Rating must be between 1 and 5")
+            if rating < 1 or rating > 5 or not isinstance(rating, int):
+                raise ValueError("Rating must be an integer between 1 and 5")
+
+            destination = Destination.find_by_id(destination_id)
+            if not destination:
+                raise ValueError("Destination id does not correspond to a destination")
 
             Activity.add_activity(name, destination_id, description, rating)
             print(f'Success: "{name}" Activity created')
             break
         except ValueError as ve:
-            print("Error creating activity: ", ve)
+            if str(ve).startswith("invalid literal for int() with base 10"):
+                print("Rating must be an integer between 1 and 5")
+            else:
+                print("Error creating activity: ", ve)
+
+
+
 
 def update_activity():
     while True:
@@ -421,9 +435,9 @@ def update_activity():
             print(f'Activity {id_} not found')
             return
 
-        name = input("Enter the activity's new name: ")
-        description = input("Enter the activity's new description: ")
-        rating = input("Enter the activity's new rating (1 to 5 stars): ")
+        name = input("Enter the activity's new name (leave empty to keep current): ")
+        description = input("Enter the activity's new description (leave empty to keep current): ")
+        rating = input("Enter the activity's new rating (1 to 5 stars) (leave empty to keep current): ")
 
         try:
             if rating:
@@ -435,7 +449,10 @@ def update_activity():
             print(f'Successfully updated activity: {activity}')
             break
         except ValueError as ve:
-            print("Error updating activity: ", ve)
+            if str(ve).startswith("invalid literal for int() with base 10"):
+                print("Rating must be an integer between 1 and 5")
+            else:
+                print("Error creating activity: ", ve)
 
 def delete_activity():
     id_ = input("Enter the activity's id: ")

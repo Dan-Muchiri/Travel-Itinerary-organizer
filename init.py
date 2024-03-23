@@ -1,7 +1,7 @@
 from sqlalchemy.orm import declarative_base, sessionmaker, registry
 from sqlalchemy import create_engine
 
-# Define your database URL
+# Database URL
 db_url = "sqlite:///travel_organizer.db"
 
 # Create the SQLAlchemy engine

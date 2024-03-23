@@ -7,18 +7,15 @@ from faker import Faker
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 
-# Create an instance of Faker
 fake = Faker()
 
 try:
     Base.metadata.drop_all(engine)
-    # Create the database tables
     Base.metadata.create_all(engine)
     print("Database tables created successfully.")
 except SQLAlchemyError as e:
     print("Error creating database tables:", e)
 
-# Define function to generate fake data for trips, destinations, accommodations, activities, and transportation
 def generate_seed_data():
     Base.metadata.bind = engine
     
@@ -27,7 +24,6 @@ def generate_seed_data():
     session = DBSession()
 
     try:
-        # Generate seed data for trips
         trips = []
         
         japan = Trip(
@@ -75,7 +71,6 @@ def generate_seed_data():
         trips.append(spain)
         session.add(spain)
 
-        # Generate seed data for destinations, accommodations,
         destinations = [] 
         for _ in range(20):
             destination = Destination(
@@ -85,9 +80,8 @@ def generate_seed_data():
             destinations.append(destination)
             session.add(destination)
 
-         # Generate seed data for accommodations
         accommodations = []
-        for _ in range(40):
+        for _ in range(50):
             accommodation = Accommodation(
                 name=fake.company(),
                 price=fake.random_number(digits=3),
@@ -97,9 +91,8 @@ def generate_seed_data():
             accommodations.append(accommodation)
             session.add(accommodation)
 
-        # Generate seed data for activities
         activities = []
-        for _ in range(40):
+        for _ in range(50):
             activity = Activity(
                 name=fake.word(),
                 description=fake.text(),
@@ -109,11 +102,8 @@ def generate_seed_data():
             activities.append(activity)
             session.add(activity)
 
-
-        # Commit the changes
         session.commit()
 
-        # Return the generated data
         return trips
 
     except Exception as e:
@@ -122,12 +112,10 @@ def generate_seed_data():
         raise e
 
     finally:
-        # Close session
         session.close()
 
 if __name__ == "__main__":
 
-    # Generate seed data # Clear
     generate_seed_data()
 
 

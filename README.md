@@ -30,6 +30,8 @@ To use the Travel Itinerary Organizer, follow these steps:
 
 ## Usage
 
+Browse your planned trips! Trips have many destinations to visit! The destinations have many accomodations to stay and activities to do!
+
 The Travel Itinerary Organizer provides the following main menu options:
 
 ### Trips Menu

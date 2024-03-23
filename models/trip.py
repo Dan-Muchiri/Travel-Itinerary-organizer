@@ -102,10 +102,8 @@ class Trip(Base):
         :param end_date: (Optional) The new end date of the trip.
         :param description: (Optional) The new description of the trip.
         """
-        # Query the trip by ID
         trip = session.query(Trip).get(trip_id)
 
-        # If the trip is found, update its attributes
         if trip:
             if name:
                 trip.name = name
@@ -134,10 +132,8 @@ class Trip(Base):
         :param trip_id: The ID of the trip.
         :return: The description of the trip if found, None otherwise.
         """
-        # Query the trip by ID
         trip = session.query(cls).filter_by(id=trip_id).first()
 
-        # If the trip is found, return its description
         if trip:
             return trip.description
         else:
