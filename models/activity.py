@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, desc
 from sqlalchemy.orm import relationship
 from init import Base, session
 
@@ -98,4 +98,20 @@ class Activity(Base):
 
             session.commit()
 
-    
+    @classmethod
+    def find_top5_fun_activities(cls):
+        """
+        Find the top 5 most fun activities based on their ratings.
+
+        :return: A list of the top 5 most fun Activity objects.
+        """
+        return session.query(cls).order_by(desc(cls.rating)).limit(5).all()
+
+    @classmethod
+    def find_top5_least_fun_activities(cls):
+        """
+        Find the top 5 least fun activities based on their ratings.
+
+        :return: A list of the top 5 least fun Activity objects.
+        """
+        return session.query(cls).order_by(cls.rating).limit(5).all()

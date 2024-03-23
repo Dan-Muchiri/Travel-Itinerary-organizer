@@ -453,7 +453,7 @@ def get_activities():
     if destination:
         activities = destination.get_activities()
         if activities:
-            print(f"Activities for Destination '{destination.name}':")
+            print(f"Activities for Destination '{destination.name}' sorted by highest fun rating:")
             for activity in activities:
                 print(f"Activity: {activity.name}, ID: {activity.id}, Rating:{activity.rating}")
         else:
@@ -461,4 +461,37 @@ def get_activities():
     else:
         print("Destination not found.")
 
+def get_activity_description():
+    id_ = input("Enter the activity's id: ")
+    if activity := Activity.find_by_id(id_):
+        print(f"Activity Name: {activity.name}")
+        print(f"Description: {activity.description}")
+
+def get_five_most_fun_activities():
+    """
+    Retrieve the 5 most fun activities.
+
+    :return: A list of Activities objects representing the 5 most fun activities.
+    """
+    activities = Activity.find_top5_fun_activities()
+    if activities:
+        print("Five most fun activities:")
+        for activity in activities:
+            print(f"Activity: {activity.name}, Rating: {activity.rating}")
+    else:
+        print("No activity found.")
+
+def get_five_least_fun_activities():
+    """
+    Retrieve the 5 least fun activities.
+
+    :return: A list of Activity objects representing the 5 least fun activities.
+    """
+    activities = Activity.find_top5_least_fun_activities()
+    if activities:
+        print("Five least fun activities:")
+        for activity in activities:
+            print(f"Activity: {activity.name}, Rating: {activity.rating}")
+    else:
+        print("No activity found.")
 

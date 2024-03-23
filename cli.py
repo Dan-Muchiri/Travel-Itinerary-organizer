@@ -34,7 +34,10 @@ from helpers import (
     create_activity,
     update_activity,
     delete_activity,
-    get_activities
+    get_activities,
+    get_activity_description,
+    get_five_least_fun_activities,
+    get_five_most_fun_activities
 )
 
 
@@ -99,9 +102,9 @@ def handle_destinations_menu():
         elif choice == "17":
             find_destination_by_id()
         elif choice == "18":
-            get_accommodations()
-        elif choice == "19":
             get_activities()
+        elif choice == "19":
+            get_accommodations()
         elif choice == "20":
             find_most_expensive_accommodation()
         elif choice == "21":
@@ -153,8 +156,14 @@ def handle_activities_menu():
         elif choice == "36":
             find_activity_by_id()
         elif choice == "37":
-            update_activity()
+            get_activity_description()
         elif choice == "38":
+            get_five_most_fun_activities()
+        elif choice == "39":
+            get_five_least_fun_activities()
+        elif choice == "40":
+            update_activity()
+        elif choice == "41":
             delete_activity()
         else:
             print("Invalid choice")
@@ -199,7 +208,7 @@ def destinations_menu():
     print("15: Add a new destination")
     print("16. Find a destination by it's name")
     print("17. Find a destination by it's id")
-    print("18: Get a destination's all activities")
+    print("18: Get a destination's all activities sorted by fun rating")
     print("19: Get a destination's all accommodations")
     print("20: Find a destination's most expensive accommodation")
     print("21: Find a destination's cheapest accommodation")
@@ -230,8 +239,11 @@ def activities_menu():
     print("34: Add a new activity")
     print("35. Find an activity by it's name")
     print("36. Find an activity by it's id")
-    print("37: Update an existing activity")
-    print("38: Delete an existing activity")
+    print("37: Get an activity's description")
+    print("38: List the top 5 most fun activities")
+    print("39: List the top 5 least fun activities")
+    print("40: Update an existing activity")
+    print("41: Delete an existing activity")
     print("0: Return to Main Menu")
 
 

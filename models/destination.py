@@ -126,8 +126,8 @@ class Destination(Base):
 
     def get_activities(self):
         """
-        Retrieve all activities associated with this destination.
+        Retrieve all activities associated with this destination, sorted by most fun rating.
 
-        :return: A list of Activity objects representing all activities for this destination.
+        :return: A list of Activity objects representing all activities for this destination, sorted by rating.
         """
-        return self.activities
+        return sorted(self.activities, key=lambda activity: activity.rating, reverse=True)
