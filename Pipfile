@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 sqlalchemy = "*"
 faker = "*"
+colorama = "*"
+emoji = "*"
 
 [dev-packages]
 
